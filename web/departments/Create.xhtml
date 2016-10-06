@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartmentsCreateDlg" widgetVar="DepartmentsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDepartmentsTitle}">
+            <h:form id="DepartmentsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{departmentsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDepartmentsLabel_departmentId}" for="departmentId" />
+                        <p:inputText id="departmentId" value="#{departmentsController.selected.departmentId}" title="#{bundle.CreateDepartmentsTitle_departmentId}" required="true" requiredMessage="#{bundle.CreateDepartmentsRequiredMessage_departmentId}"/>
+                        <p:outputLabel value="#{bundle.CreateDepartmentsLabel_departmentName}" for="departmentName" />
+                        <p:inputText id="departmentName" value="#{departmentsController.selected.departmentName}" title="#{bundle.CreateDepartmentsTitle_departmentName}" required="true" requiredMessage="#{bundle.CreateDepartmentsRequiredMessage_departmentName}"/>
+                        <p:outputLabel value="#{bundle.CreateDepartmentsLabel_managerId}" for="managerId" />
+                        <p:inputText id="managerId" value="#{departmentsController.selected.managerId}" title="#{bundle.CreateDepartmentsTitle_managerId}" />
+                        <p:outputLabel value="#{bundle.CreateDepartmentsLabel_locationId}" for="locationId" />
+                        <p:inputText id="locationId" value="#{departmentsController.selected.locationId}" title="#{bundle.CreateDepartmentsTitle_locationId}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{departmentsController.create}" value="#{bundle.Save}" update="display,:DepartmentsListForm:datalist,:growl" oncomplete="handleSubmit(args,'DepartmentsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DepartmentsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

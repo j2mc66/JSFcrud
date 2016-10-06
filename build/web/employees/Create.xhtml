@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmployeesCreateDlg" widgetVar="EmployeesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEmployeesTitle}">
+            <h:form id="EmployeesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{employeesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_employeeId}" for="employeeId" />
+                        <p:inputText id="employeeId" value="#{employeesController.selected.employeeId}" title="#{bundle.CreateEmployeesTitle_employeeId}" required="true" requiredMessage="#{bundle.CreateEmployeesRequiredMessage_employeeId}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_departments}" for="departments" />
+                        <p:selectOneMenu id="departments" value="#{employeesController.selected.departments}" >
+                            <f:selectItems value="#{departmentsController.itemsAvailableSelectOne}"
+                                           var="departmentsItem"
+                                           itemValue="#{departmentsItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_firstName}" for="firstName" />
+                        <p:inputText id="firstName" value="#{employeesController.selected.firstName}" title="#{bundle.CreateEmployeesTitle_firstName}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_lastName}" for="lastName" />
+                        <p:inputText id="lastName" value="#{employeesController.selected.lastName}" title="#{bundle.CreateEmployeesTitle_lastName}" required="true" requiredMessage="#{bundle.CreateEmployeesRequiredMessage_lastName}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{employeesController.selected.email}" title="#{bundle.CreateEmployeesTitle_email}" required="true" requiredMessage="#{bundle.CreateEmployeesRequiredMessage_email}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_phoneNumber}" for="phoneNumber" />
+                        <p:inputText id="phoneNumber" value="#{employeesController.selected.phoneNumber}" title="#{bundle.CreateEmployeesTitle_phoneNumber}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_hireDate}" for="hireDate" />
+                        <p:calendar id="hireDate" pattern="MM/dd/yyyy" value="#{employeesController.selected.hireDate}" title="#{bundle.EditEmployeesTitle_hireDate}" required="true" requiredMessage="#{bundle.EditEmployeesRequiredMessage_hireDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_jobId}" for="jobId" />
+                        <p:inputText id="jobId" value="#{employeesController.selected.jobId}" title="#{bundle.CreateEmployeesTitle_jobId}" required="true" requiredMessage="#{bundle.CreateEmployeesRequiredMessage_jobId}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_salary}" for="salary" />
+                        <p:inputText id="salary" value="#{employeesController.selected.salary}" title="#{bundle.CreateEmployeesTitle_salary}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_commissionPct}" for="commissionPct" />
+                        <p:inputText id="commissionPct" value="#{employeesController.selected.commissionPct}" title="#{bundle.CreateEmployeesTitle_commissionPct}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeesLabel_managerId}" for="managerId" />
+                        <p:inputText id="managerId" value="#{employeesController.selected.managerId}" title="#{bundle.CreateEmployeesTitle_managerId}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{employeesController.create}" value="#{bundle.Save}" update="display,:EmployeesListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmployeesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmployeesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
